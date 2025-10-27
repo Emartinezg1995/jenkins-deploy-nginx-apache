@@ -6,9 +6,9 @@ pipeline {
        {
             steps {
                 //First, drop the directory if exists
-                sh 'rm -rf /home/jenkins/app-web'
+                sh 'rm -rf /home/vboxuser/jenkins/app-web'
                 //Create the directory
-                sh 'mkdir /home/jenkins/app-web'               
+                sh 'mkdir /home/vboxuser/jenkins/app-web'               
             }
         }
         stage('Drop the containers'){   
