@@ -22,17 +22,19 @@ pipeline {
         //Creating the containers in Parallel
         stage('Create the containers in Parallel') {
             parallel{
+                //  Create the Apache container
                 stage('Create the Apache container')
                 {           
                     steps {
                     echo 'Creating the Apache Container...'
-                    sh 'docker run -dit --name app-web-apache -p 9100:80  -v /home/jenkins/app-web:/usr/local/apache2/htdocs/ httpd'
+                    sh 'docker run -dit --name app-web-apache -p 9100:80  -v /home/vboxuser/jenkins/app-web:/usr/local/apache2/htdocs/ httpd'
                     }
                 }
+                // Create the Nginx container
                 stage('Create the Nginx container') {
                    steps {
-                   echo 'Creating the Apache container...'
-                   sh 'docker run -dit --name app-web-nginx -p 9200:80  -v /home/jenkins/app-web:/usr/share/nginx/html nginx'         
+                   echo 'Creating the Nginx container...'
+                   sh 'docker run -dit --name app-web-nginx -p 9200:80  -v /home/vboxuser/jenkins/app-web:/usr/share/nginx/html nginx'         
                    }
                 }       
             }   
@@ -41,7 +43,7 @@ pipeline {
         stage('Copy the web application to the container directory') {
             steps {
                 echo 'Copying web application...'             
-                sh 'cp -r web/* /home/jenkins/app-web'
+                sh 'cp -r web/* /home/vboxuser/jenkins/app-web'
             }
         }
     }
